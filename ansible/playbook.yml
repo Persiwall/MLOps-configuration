@@ -1,5 +1,0 @@
----
-- name: Deploy MLOps stack via Docker Compose
-  hosts: mlops
-  roles:
-    - deploy
