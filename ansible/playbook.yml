@@ -1,0 +1,7 @@
+---
+- name: Deploy MLOps stack via Docker Compose
+  hosts: mlops
+  collections:
+    - ansible.posix
+  roles:
+    - deploy

@@ -1,0 +1,22 @@
+---
+- name: Ensure playbook directory exists
+  file:
+    path: "{{ playbook_dir }}"
+    state: directory
+
+- name: Copy entire application tree into playbook directory
+  ansible.posix.synchronize:
+    src: "{{ role_path }}/files/"
+    dest: "{{ playbook_dir }}/"
+    recursive: yes
+    delete: no
+
+- name: Launch (build & run) Docker Compose
+  community.docker.docker_compose_v2:
+    project_src: "{{ playbook_dir }}"
+    build: always
+    pull: always
+    state: present
+    remove_orphans: yes
+    recreate: always
+    timeout: 600
